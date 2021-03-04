@@ -12,36 +12,44 @@
         mounted() {
             this.chartThree()
         },
-        methods:{
-            chartThree(){
+        methods: {
+            chartThree() {
                 let chartThree = echarts.init(document.getElementById('cardThree'));
                 chartThree.setOption({
                     title: {
                         text: '用户增长',
-                        left:'center'
+                        left: 'center'
                     },
                     tooltip: {
-                        type: 'cross'
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross',
+                            snap: true
+                        }
+                    },
+                    grid: {
+                        left: '2%',
+                        right: '2%',
+                        bottom: '0%',
+                        containLabel: true
                     },
                     xAxis: {
                         type: 'category',
                         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                         boundaryGap: false,
-                        axisPointer:{
-                            show:true,
-                            type:'line',
-                            snap:true
-                        }
                     },
                     yAxis: {
                         type: 'value'
                     },
-                    series: [{
-                        data: [82, 114, 254, 298, 410, 450, 600],
-                        type: 'line',
-                        smooth: true,
-                        areaStyle: {}
-                    }],
+                    series: [
+                        {
+                            name: '用户数量',
+                            data: [82, 114, 254, 298, 410, 450, 600],
+                            type: 'line',
+                            smooth: true,
+                            areaStyle: {}
+                        }
+                    ],
 
                 })
             }

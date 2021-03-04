@@ -1,10 +1,10 @@
 <template>
-    <h1>login</h1>
+    <h1>Curriculum</h1>
 </template>
 
 <script>
     export default {
-        name: "Login"
+        name: "Curriculum"
     }
 </script>
 

@@ -11,7 +11,40 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter)
 
 const routes = [
-
+  {
+    path:'',
+    redirect:'/home'
+  },
+  {
+    path: '/home',
+    component:() => import('../views/Home'),
+    children:[
+      {
+        path:'',
+        redirect:'/index'
+      },
+      {
+        path: '/index',
+        component:() => import('../views/Index'),
+      },
+      {
+        path: '/teacher',
+        component:() => import('../views/Teacher'),
+      },
+      {
+        path: '/user',
+        component:() => import('../views/User'),
+      },
+      {
+        path: '/curriculum',
+        component:() => import('../views/Curriculum'),
+      },
+    ]
+  },
+  {
+    path: '/login',
+    component:() => import('../views/Login')
+  },
 ]
 
 const router = new VueRouter({

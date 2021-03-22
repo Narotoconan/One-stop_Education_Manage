@@ -1,0 +1,50 @@
+.ltPos(@left:0,@top:0) {
+  position: absolute;
+  left: @left;
+  top: @top;
+}
+.rtPos(@right:0,@top:0) {
+  position: absolute;
+  right: @right;
+  top: @top;
+}
+.ctPos(@left:50%,@top:0) {
+  position: absolute;
+  left: @left;
+  top: @top;
+  transform: translate(-50%,0);
+}
+.lcPos(@left:0,@top:50%) {
+  position: absolute;
+  left: @left;
+  top: @top;
+  transform: translate(0,-50%);
+}
+.rcPos(@right:0,@top:50%) {
+  position: absolute;
+  right: @right;
+  top: @top;
+  transform: translate(0,-50%);
+}
+.ccPos(@left:50%,@top:50%) {
+  position: absolute;
+  left: @left;
+  top: @top;
+  transform: translate(-50%,-50%);
+}
+.lbPos(@left:0,@bottom:0) {
+  position: absolute;
+  left: @left;
+  bottom: @bottom;
+}
+.cbPos(@left:50%,@bottom:0) {
+  position: absolute;
+  left: @left;
+  bottom: @bottom;
+  transform: translate(-50%,0);
+}
+.rbPos(@right:0,@bottom:0) {
+  position: absolute;
+  right: @right;
+  bottom: @bottom;
+}

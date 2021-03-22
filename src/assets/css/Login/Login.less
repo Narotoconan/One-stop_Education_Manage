@@ -1,0 +1,105 @@
+.loginPage{
+  height: 100vh;
+  background: url("../../../assets/img/Login/loginBackground.jpg") no-repeat center;
+  background-size: cover;
+  font-size: 53px;
+}
+.loginBox{
+  width: 9em;
+  height: 12em;
+  border-radius: .4em;
+  background-color: rgba(198, 200, 203, 0);
+  .ccPos(50%,49%);
+  text-align: center;
+}
+.logo{
+  text-align: center;
+  font-family: 宋体;
+  font-weight: 600;
+  img{
+    height: 1.75em;
+  }
+  .title{
+    font-size: .45em;
+    letter-spacing: 5px;
+  }
+}
+.inputGroup{
+  input{
+    outline: none;
+    font-size: .3em;
+    &::-webkit-input-placeholder{
+      color: #babdc0;
+    }
+    transition: all 0.5s !important;
+  }
+  .inputItem{
+    height: 4.2em;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: 10px;
+    background-color: #f3f6f9;
+    border: 1px solid #f3f6f9;
+  }
+  .submitBtn{
+    font-size: .35em;
+    width: 15em;
+  }
+}
+.errInput{
+  border-color: #ee6666 !important;
+  &::-webkit-input-placeholder{
+    color: #ee6666  !important;
+  }
+}
+
+@media screen and (max-width:1200px) {
+  .loginPage{
+    font-size: 50px;
+  }
+}
+@media screen and (max-width:960px) {
+  .loginPage{
+    font-size: 43px;
+  }
+  .inputGroup{
+    .inputItem{
+      height: 4.5em;
+    }
+  }
+}
+@media screen and (max-width:410px) {
+  .loginPage{
+    font-size: 40px;
+  }
+  .inputGroup{
+    .inputItem{
+      height: 4.7em;
+    }
+  }
+}
+@media screen and (max-width:361px) {
+  .loginPage{
+    font-size: 38px;
+  }
+  .inputGroup{
+    .inputItem{
+      height: 4.7em;
+    }
+  }
+}
+@media screen and (max-width:321px) {
+  .loginPage{
+    font-size: 33px;
+  }
+  .inputGroup{
+    .inputItem{
+      height: 4.7em;
+    }
+  }
+}
+@media screen and (max-width:960px) and (orientation : landscape){
+  .loginBox{
+    .ctPos(50%,10px)
+  }
+}

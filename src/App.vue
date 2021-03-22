@@ -5,6 +5,13 @@
 </template>
 
 <style lang="less">
+  @media screen and (max-width:1200px) {
+
+  }
   li{
     list-style-type: none !important;
-  }</style>
+  }
+  .el-dialog{
+    border-radius: 15px!important;
+  }
+</style>

@@ -6,11 +6,17 @@
 
 <script>
     import * as echarts from "echarts";
+    import {mapState} from "vuex";
 
     export default {
         name: "CardThree",
         mounted() {
             this.chartThree()
+        },
+        computed: {
+            ...mapState({
+                userIncrease: state => state.Statistic.statisticData.userIncrease
+            })
         },
         methods: {
             chartThree() {
@@ -35,22 +41,24 @@
                     },
                     xAxis: {
                         type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        data: this.userIncrease.dateList,
                         boundaryGap: false,
                     },
                     yAxis: {
                         type: 'value'
                     },
+                    color:'#31cfb6',
                     series: [
                         {
                             name: '用户数量',
-                            data: [82, 114, 254, 298, 410, 450, 600],
+                            data: this.userIncrease.countsList,
                             type: 'line',
                             smooth: true,
-                            areaStyle: {}
+                            areaStyle: {
+
+                            }
                         }
                     ],
-
                 })
             }
         }

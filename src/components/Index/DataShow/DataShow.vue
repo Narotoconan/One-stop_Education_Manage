@@ -1,6 +1,6 @@
 <template>
     <div class="dataShow">
-        <div class="row">
+        <div class="row" v-if="$store.state.Statistic.statisticData">
             <div class="col w-50">
                 <card-one></card-one>
             </div>
@@ -8,11 +8,16 @@
                 <card-two></card-two>
             </div>
             <div class="w-100"></div>
-            <div class="col">
+            <div class="col w-50">
                 <card-three></card-three>
             </div>
+            <div class="col w-50">
+                <card-four></card-four>
+            </div>
         </div>
-
+        <div class="col w-100 h-100" v-else>
+            <data-loading></data-loading>
+        </div>
     </div>
 </template>
 
@@ -21,10 +26,12 @@
     import CardTwo from "./CardTwo";
     import CardThree from "./CardThree";
     import CardFour from "./CardFour";
+    import DataLoading from "./DataLoading";
 
     export default {
         name: "DataShow",
-        components:{
+        components: {
+            DataLoading,
             CardOne,
             CardTwo,
             CardThree,
@@ -33,9 +40,7 @@
         mounted() {
 
         },
-        methods:{
-
-        }
+        methods: {}
     }
 </script>
 

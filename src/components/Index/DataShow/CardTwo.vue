@@ -6,19 +6,25 @@
 
 <script>
     import * as echarts from "echarts";
+    import {mapState} from "vuex";
 
     export default {
         name: "CardTwo",
+        computed: {
+            ...mapState({
+                courseCategory: state => state.Statistic.statisticData.courseCategory
+            })
+        },
         mounted() {
             this.chartTwo()
         },
-        methods:{
-            chartTwo(){
+        methods: {
+            chartTwo() {
                 let chartTwo = echarts.init(document.getElementById('cardTwo'));
                 chartTwo.setOption({
                     title: {
                         text: '课程数量',
-                        left:'center'
+                        left: 'center'
                     },
                     tooltip: {
                         trigger: 'item'
@@ -28,6 +34,11 @@
                         top: '5%',
                         left: 'left'
                     },
+                    color: [
+                        '#5884de',
+                        '#17cc8c',
+                        '#fad95f'
+                    ],
                     series: [
                         {
                             name: '访问来源',
@@ -48,12 +59,7 @@
                                 }
                             },
 
-                            data: [
-                                {value: 1048, name: '数学课程'},
-                                {value: 735, name: '英语课程'},
-                                {value: 580, name: '代码编程'},
-
-                            ]
+                            data: this.courseCategory
                         }
                     ]
                 })

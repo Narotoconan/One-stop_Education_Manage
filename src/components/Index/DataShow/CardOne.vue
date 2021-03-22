@@ -6,18 +6,24 @@
 
 <script>
     import * as echarts from 'echarts';
+    import {mapState} from 'vuex'
     export default {
         name: "CardOne",
+        computed:{
+          ...mapState({
+              courseTop:state => state.Statistic.statisticData.courseTop
+          })
+        },
         mounted() {
             this.chartOne()
         },
-        methods:{
-            chartOne(){
+        methods: {
+            chartOne() {
                 let chartOne = echarts.init(document.getElementById('cardOne'));
                 chartOne.setOption({
                     title: {
                         text: '课程收藏排行',
-                        left:'center'
+                        left: 'center'
                     },
                     tooltip: {
                         trigger: 'item',
@@ -31,33 +37,43 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    xAxis: [
-                        {
-                            type: 'category',
-                            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                            axisTick: {
-                                alignWithLabel: true
+                    xAxis: {
+                        type: 'category',
+                        data: this.courseTop.title,
+                        axisTick: {
+                            alignWithLabel: true,
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: '#7c8893',
+                                fontSize: 16
+                            },
+                            interval: 0,
+                            formatter: function(value) {
+                                return (value.length > 8 ? (value.slice(0,8)+"...") : value )
                             }
-                        }
-                    ],
+
+                        },
+                    },
                     yAxis: [
                         {
                             type: 'value'
                         }
                     ],
+                    color: '#fc5185',
                     series: [
                         {
-                            name: '直接访问',
+                            name: '课程信息',
                             type: 'bar',
-                            barWidth: '40%',
+                            barWidth: '30%',
                             data: [
-                                {value:20,name:'课程一的名字'},
-                                {value:40,name:'课程二的名字'},
-                                {value:55,name:'课程三的名字'},
-                                {value:60,name:'课程四的名字'},
-                                {value:90,name:'课程五的名字'},
-                                {value:150,name:'课程六的名字'},
-                                {value:178,name:'课程七的名字'},
+                                {value: this.courseTop.counts[0], name: this.courseTop.title[0]},
+                                {value: this.courseTop.counts[1], name: this.courseTop.title[1]},
+                                {value: this.courseTop.counts[2], name: this.courseTop.title[2]},
+                                {value: this.courseTop.counts[3], name: this.courseTop.title[3]},
+                                {value: this.courseTop.counts[4], name: this.courseTop.title[4]},
+                                {value: this.courseTop.counts[5], name: this.courseTop.title[5]},
+                                {value: this.courseTop.counts[6], name: this.courseTop.title[6]},
                             ]
                         }
                     ]

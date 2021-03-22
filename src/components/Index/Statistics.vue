@@ -5,7 +5,10 @@
                 <StatisticsCard title="总播放量">
                     <i class="bi bi-play-btn-fill" :style="'color: '+color[0]" slot="icon"></i>
                     <div id="playCount" class="count mt-3"  slot="count">
-                        2000
+                        <span v-if="statisticCount">
+                           {{ statisticCount.viewCounts }}
+                        </span>
+                        <span v-else>0</span>
                     </div>
                 </StatisticsCard>
             </div>
@@ -13,7 +16,10 @@
                 <StatisticsCard title="用户数量">
                     <i class="bi bi-people-fill" :style="'color: '+color[1]" slot="icon"></i>
                     <div id="userCount" class="count mt-3"  slot="count">
-                        124652
+                        <span v-if="statisticCount">
+                            {{ statisticCount.userCounts }}
+                        </span>
+                        <span v-else>0</span>
                     </div>
                 </StatisticsCard>
             </div>
@@ -21,7 +27,10 @@
                 <StatisticsCard title="课程数目">
                     <i class="bi bi-kanban" :style="'color: '+color[2]" slot="icon"></i>
                     <div id="curCount" class="count mt-3"  slot="count">
-                        874251
+                        <span v-if="statisticCount">
+                         {{ statisticCount.courseCounts }}
+                        </span>
+                        <span v-else>0</span>
                     </div>
                 </StatisticsCard>
             </div>
@@ -29,7 +38,10 @@
                 <StatisticsCard title="总收藏量">
                     <i class="bi bi-bookmark-star-fill" :style="'color: '+color[3]" slot="icon"></i>
                     <div id="favoritesCount" class="count mt-3"  slot="count">
-                        4125
+                        <span v-if="statisticCount">
+                            {{ statisticCount.favoriteCounts }}
+                        </span>
+                        <span v-else>0</span>
                     </div>
                 </StatisticsCard>
             </div>
@@ -40,6 +52,7 @@
 <script>
     import StatisticsCard from "../../assets/css/Index/StatisticsCard";
     import { CountUp } from 'countup.js'
+    import {mapState} from 'vuex'
     export default {
         name: "Statistics",
         components:{
@@ -48,27 +61,40 @@
         data(){
             return {
                 color:[
-                    '#46c3db',
-                    '#21e6c1',
-                    '#f3558e',
-                    '#3d5af1'
-                ]
+                    'rgb(66, 153, 244)',
+                    'rgb(234, 67, 53)',
+                    'rgb(251, 188, 5)',
+                    'rgb(52, 168, 83)',
+                ],
             }
         },
+        computed:{
+            ...mapState({
+                statisticCount:state => state.Statistic.statisticData
+            })
+        },
         mounted() {
-            this.countUp()
+
+        },
+        watch:{
+            'statisticCount': {
+                handler: function (val){
+                    this.countUp()
+                }
+            },
         },
         methods:{
-          countUp(){
-              let playCount = new CountUp('playCount', 2000)
-              let userCount = new CountUp('userCount', 124652)
-              let curCount = new CountUp('curCount', 874251)
-              let favoritesCount = new CountUp('favoritesCount', 4125)
-              playCount.start()
-              userCount.start()
-              curCount.start()
-              favoritesCount.start()
-          }
+            countUp(){
+                if (!this.statisticCount) return
+                let viewCounts = new CountUp('playCount', this.statisticCount.viewCounts)
+                let userCounts = new CountUp('userCount', this.statisticCount.userCounts)
+                let courseCounts = new CountUp('curCount', this.statisticCount.courseCounts)
+                let favoriteCounts = new CountUp('favoritesCount', this.statisticCount.favoriteCounts)
+                viewCounts.start()
+                userCounts.start()
+                courseCounts.start()
+                favoriteCounts.start()
+            },
         }
     }
 </script>

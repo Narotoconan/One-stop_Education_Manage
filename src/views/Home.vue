@@ -4,6 +4,16 @@
             <div class="logo">
                 <img src="../assets/img/logo.png" alt="logo"/>
             </div>
+            <div class="mt-4 mb-3" style="text-align: center">
+                <div class="d-inline-block" v-if="$store.state.UserManage.adminMessage">
+                    <el-avatar class="adminAv"
+                               :src="$store.state.targetURL + $store.state.UserManage.adminMessage.userAvatar">
+                    </el-avatar>
+                    <div>
+                        <span class="adminName">{{ $store.state.UserManage.adminMessage.username }}</span>
+                    </div>
+                </div>
+            </div>
             <ul class="navList pl-0 mt-4">
                 <li @click="toRoute('/index')">
                     <list-aside path="/index">
@@ -29,7 +39,7 @@
                         <span slot="name">课程管理</span>
                     </list-aside>
                 </li>
-                <li>
+                <li @click="toRoute('/login')">
                     <list-aside>
                         <i class="bi bi-x-diamond-fill" slot="icon"></i>
                         <span slot="name">退出登录</span>
@@ -53,7 +63,7 @@
             ListAside
         },
         created() {
-
+            this.$store.dispatch('getUserMessage')
         },
         mounted() {
             this.initiateAside()

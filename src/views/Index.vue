@@ -16,6 +16,9 @@
         components:{
             Statistics,
             DataShow
+        },
+        created() {
+            this.$store.dispatch('getStatisticCount')
         }
     }
 </script>

@@ -13,5 +13,8 @@ export default {
     },
     showErr(message){
         Message.error(message + '失败')
+    },
+    showMessage(message){
+        Message.warning(message)
     }
 }

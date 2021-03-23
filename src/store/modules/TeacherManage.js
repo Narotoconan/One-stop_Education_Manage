@@ -5,19 +5,19 @@ export default {
     state: {
         teacherList: null,
         total: 0,
-        newUserId:null,
-        isNewTeacher:false,
-        isChangeTeacher:false
+        newUserId: null,
+        isNewTeacher: false,
+        isChangeTeacher: false
     },
     mutations: {
         putTeacherList(state, payload) {
             state.teacherList = payload.teachers
             state.total = payload.total
         },
-        putNewUserId(state, payload){
+        putNewUserId(state, payload) {
             state.newUserId = payload
         },
-        putState(state, payload){
+        putTeacherState(state, payload) {
             state[payload.statusName] = payload.status
         },
         localDelTeachers(state, payload) {
@@ -31,6 +31,7 @@ export default {
             TeacherApi.getTeacher(payload)
                 .then(res => {
                     if (!verify.resultCode(res, 1410)) return
+                    if (!res.data.total) verify.showMessage('无教师')
                     context.commit('putTeacherList', res.data)
                 }).catch(err => {
                 verify.showErr('获取教师')
@@ -48,42 +49,42 @@ export default {
                 console.log(err)
             })
         },
-        changeTeacher(context, payload){
+        changeTeacher(context, payload) {
             TeacherApi.editTeacher(payload)
                 .then(res => {
-                    if (!verify.resultCode(res,1430)) return
+                    if (!verify.resultCode(res, 1430)) return
                     verify.showSuccess('修改教师信息')
-                    context.commit('putState',{
-                        statusName:'isChangeTeacher',
-                        status:true
+                    context.commit('putTeacherState', {
+                        statusName: 'isChangeTeacher',
+                        status: true
                     })
                 }).catch(err => {
-                    verify.showErr('修改教师信息')
-                    console.log(err)
+                verify.showErr('修改教师信息')
+                console.log(err)
             })
         },
-        newTeacher(context, payload){
+        newTeacher(context, payload) {
             TeacherApi.addNewTeacher(payload.message)
                 .then(res => {
-                    if (!verify.resultCode(res,1400)) return
-                    context.commit('putNewUserId',res.data.teacherId)
-                    context.dispatch('newAvatar',payload.blobImg)
+                    if (!verify.resultCode(res, 1400)) return
+                    context.commit('putNewUserId', res.data.teacherId)
+                    context.dispatch('newAvatar', payload.blobImg)
                 }).catch(err => {
-                    verify.showErr('添加教师信息')
-                    console.log(err)
+                verify.showErr('添加教师信息')
+                console.log(err)
             })
         },
-        newAvatar(context, payload){
+        newAvatar(context, payload) {
             let formData = new FormData()
             formData.append('teacherAvatar', payload)
             TeacherApi.addNewTeacherAvatar(
                 context.state.newUserId,
                 formData
             ).then(res => {
-                if (!verify.resultCode(res,1420)) return
-                context.commit('putState',{
-                    statusName:'isNewTeacher',
-                    status:true
+                if (!verify.resultCode(res, 1420)) return
+                context.commit('putTeacherState', {
+                    statusName: 'isNewTeacher',
+                    status: true
                 })
                 verify.showSuccess('添加教师')
             }).catch(err => {

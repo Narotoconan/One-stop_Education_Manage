@@ -5,6 +5,7 @@ import AdminLogin from "./modules/AdminLogin"
 import Statistic from "./modules/Statistic"
 import TeacherManage from "./modules/TeacherManage"
 import UserManage from "./modules/UserManage"
+import CurriculumManage from "./modules/CurriculumManage";
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     AdminLogin,
     Statistic,
     TeacherManage,
-    UserManage
+    UserManage,
+    CurriculumManage
   }
 })

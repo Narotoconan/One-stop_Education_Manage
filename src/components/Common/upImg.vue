@@ -1,8 +1,9 @@
 <template>
     <div class="upImg">
         <div class="upBtn">
-            <el-tag effect="dark" type="warning"  @click="dialogUpImg= true">添加头像</el-tag>
-            <i class="bi bi-check-circle-fill" style="font-size: 1rem;margin-left: 1rem;color: #27d332" v-show="isOk"></i>
+            <el-tag effect="dark" type="warning" @click="dialogUpImg= true">添加头像</el-tag>
+            <i class="bi bi-check-circle-fill" style="font-size: 1rem;margin-left: 1rem;color: #27d332"
+               v-show="isOk"></i>
         </div>
         <div class="show mt-3">
             <img src="" alt="">
@@ -36,27 +37,36 @@
     import $ from 'jquery'
     import Cropper from 'cropperjs'
     import {mapState} from "vuex";
+
     export default {
         name: "upImg",
-        data(){
-          return {
-              isOk:false,
-              dialogUpImg:false,
-              showImg: null,
-              cropper: null,
-          }
+        data() {
+            return {
+                isOk: false,
+                dialogUpImg: false,
+                showImg: null,
+                cropper: null,
+            }
         },
-        computed:{
-            ...mapState({
-                isNewTeacher:state => state.TeacherManage.isNewTeacher
-            })
+        props: {
+            theWidth: {
+                type: Number,
+                default: 100
+            },
+            theHeight: {
+                type: Number,
+                default: 100
+            }
         },
-        methods:{
+        mounted() {
+            this.theSize()
+        },
+        methods: {
             toCropper() {
                 const userAvatar = $("#photograph")[0];
                 this.cropper = new Cropper(userAvatar, {
-                    aspectRatio: 3 / 3,
-                    autoCropArea:1,
+                    aspectRatio: this.theWidth / this.theHeight,
+                    autoCropArea: 1,
                     viewMode: 2,
                     preview: '.preview'
                 });
@@ -65,8 +75,8 @@
 
                 $("#toUpload").on("click", function () {
                     const cas = vm.cropper.getCroppedCanvas({
-                        width: 100 * 2,
-                        height: 100 * 2
+                        width: vm.theWidth * 2.5,
+                        height: vm.theHeight * 2.5
                     });
                     cas.toBlob(function (e) {
                         vm.$emit('imgBlob', e);  //生成Blob的图片格式
@@ -76,7 +86,7 @@
                         src: base64url
                     });
                     vm.dialogUpImg = false
-                    vm.isOk=true
+                    vm.isOk = true
                 });
                 const inputFile = document.getElementById("inputFile");
 
@@ -93,12 +103,19 @@
 
                 }, false);
             },
+            theSize() {
+                let vm = this
+                $(".show").css({
+                    "width": vm.theWidth,
+                    "height": vm.theHeight
+                })
+            },
             destroy() {
                 this.cropper.destroy()
                 $(".show img").attr({
                     src: null
                 });
-                this.isOk=false
+                this.isOk = false
             }
         }
     }
@@ -106,7 +123,8 @@
 
 <style scoped lang="less">
     @import "~cropperjs/dist/cropper.min.css";
-    .upImgDialog{
+
+    .upImgDialog {
         .uploadBox {
             height: 25rem;
             display: flex;
@@ -126,15 +144,16 @@
                     height: 190px;
                     width: 190px;
                     overflow: hidden;
-                    border-radius: 20px;
+                    border-radius: 10px;
                 }
             }
         }
     }
+
     .show {
-        height: 100px;
         width: 100px;
         border: 1px solid #d3d3d3;
+
         img {
             border: none !important;
             max-height: 100%;

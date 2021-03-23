@@ -3,7 +3,7 @@ import verify from "../../assets/js/verify"
 import JSEncrypt from 'jsencrypt/bin/jsencrypt.min'
 import CryptoJS from 'crypto-js'
 import {Message} from "element-ui"
-
+import login from '../../assets/js/login'
 export default {
     state: {
         userPassword: null,
@@ -61,6 +61,11 @@ LjOrx7KoW0KlL2xx9wIDAQAB
             LoginApi.AdminLogin(payload, context.state.RsaRandomKey)
                 .then(res => {
                     if (!verify.resultCode(res,1110)) return
+                    if (!login.checkLogin()) {
+                        Message.error('权限不足，禁止访问')
+                        login.delCookie('access_token')
+                        return
+                    }
                     Message.success('登录成功')
                     setTimeout(function () {
                         window.location.href = '/home'

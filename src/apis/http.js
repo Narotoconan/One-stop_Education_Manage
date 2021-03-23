@@ -46,7 +46,7 @@ axios.interceptors.response.use((response) => {
             window.location.href = '/login'
             break;
         case 403:
-            Message.error({message: '403 用户得到授权，但是访问是被禁止的!'})
+            Message.error({message: '403 权限不足，禁止访问！'})
             break;
         case 502:
             Message.error({message: '502 服务器没有接到有效的信息'})

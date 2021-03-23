@@ -4,7 +4,7 @@
             <div class="logo">
                 <img src="../assets/img/logo.png" alt="logo"/>
             </div>
-            <div class="mt-4 mb-3" style="text-align: center">
+            <div class="mt-5 mb-3" style="text-align: center">
                 <div class="d-inline-block" v-if="$store.state.UserManage.adminMessage">
                     <el-avatar class="adminAv"
                                :src="$store.state.targetURL + $store.state.UserManage.adminMessage.userAvatar">

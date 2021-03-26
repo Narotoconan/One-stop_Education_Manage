@@ -1,15 +1,13 @@
+@baiVw:100vw;
 .home{
-  display: flex;
   cursor: default;
   .asideMain{
-    flex: 1;
+    display: inline-block;
     background-color: white;
+    vertical-align: top;
   }
   .aside{
-    position: fixed;
-    top: 0;
-    left: 0;
-    box-shadow: 15px 15px 30px rgba(243, 188, 124, 0.09);
+    width: 210px;
     .logo{
       text-align: center;
       img{
@@ -38,7 +36,8 @@
     }
   }
   .main{
-    flex: 8;
+    display: inline-block;
+    height: 100vh;
     background-color: #eef0f8;
     >div{
       margin: 0 1.5rem;

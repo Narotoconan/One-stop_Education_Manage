@@ -80,7 +80,7 @@
             },
             homeWidth(){
                 $(".main").css({
-                    "width": $(window).width() - 210 + "px"
+                    "width": $(window).width() - 228 + "px"
                 })
             }
         }

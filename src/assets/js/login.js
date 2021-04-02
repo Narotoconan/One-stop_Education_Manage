@@ -18,7 +18,7 @@ export default {
         let token = this.getCookie('access_token')
         if (!token) return 0
         token = jwtDecode(token)
-        if(token.scopes[1] !== 'ADMIN') return 0
+        if(token.scopes[0] !== 'ADMIN') return 0
         let expTime = token.exp //过期时间
         let nowTime = Math.round(new Date() / 1000);//现在时间
         return (nowTime < expTime) ? 1 : 0

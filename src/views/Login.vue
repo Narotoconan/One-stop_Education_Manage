@@ -21,6 +21,9 @@
                 </div>
             </form>
         </div>
+        <div class="beian">
+            <a href="https://beian.miit.gov.cn/" target="_blank" class="text-black-50">陕ICP备2021004077号-1</a>
+        </div>
     </div>
 </template>
 

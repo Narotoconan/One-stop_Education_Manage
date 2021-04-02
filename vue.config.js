@@ -1,11 +1,10 @@
 const path = require("path")
 
-
 module.exports = {
     devServer: {
         proxy: {
             "/api": {
-                target: "http://39.97.185.232:25565",
+                target: "http://www.narotoconan.top:25565",
                 changeOrigin: true
             }
         }

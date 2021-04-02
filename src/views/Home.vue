@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="asideMain pt-3">
-            <div class="aside">
+            <div class="aside position-relative">
                 <div class="logo">
                     <img src="../assets/img/logo.png" alt="logo"/>
                 </div>
@@ -47,6 +47,9 @@
                         </list-aside>
                     </li>
                 </ul>
+                <div class="beian">
+                    <a href="https://beian.miit.gov.cn/" target="_blank" class="text-black-50">陕ICP备2021004077号-1</a>
+                </div>
             </div>
         </div>
         <div class="main">

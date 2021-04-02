@@ -11,7 +11,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    targetURL:'http://39.97.185.232:25565'
+    targetURL:'http://www.narotoconan.top:25565'
   },
   mutations: {},
   actions: {},
